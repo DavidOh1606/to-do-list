@@ -10,7 +10,7 @@ function createProject(name) {
     
     let projectName = name;
     const dateMade = new Date();
-    const items = [];
+    let items = [];
 
     function createToDoItem(name, notes) {
         const itemName = name;
@@ -22,10 +22,13 @@ function createProject(name) {
     }   
     
     function displayProject() {
+        
+
+
 
     }
 
-    return {projectName, dateMade, items, createToDoItem};
+    return {projectName, dateMade, items, createToDoItem, displayProject};
 }
 
 
