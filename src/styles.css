@@ -8,7 +8,7 @@ body {
     margin: 0;
 
     display: grid;
-    grid-template: 80px 1fr / 1fr 5fr; 
+    grid-template: 80px 1fr / minmax(280px, 1fr) 5fr; 
     height: 100vh;
 }
 
@@ -17,7 +17,7 @@ header {
 
     display: flex;
 
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
     padding: 16px 32px;
     align-items: center;
 
@@ -25,6 +25,11 @@ header {
 
     z-index: 2;
 
+}
+
+header .web-title {
+    font-size: 1.9rem;
+    font-weight: 700;
 }
 
 header nav {
@@ -40,13 +45,46 @@ header nav button {
 }
 
 .sidebar {
-    background-color: blue;
+    background-color: rgb(15, 162, 27);
     display: flex;
     flex-direction: column;
+    gap: 16px;
+
 
     grid-area: 2 / 1 / 3 / 2;
 
+    padding: 32px;
+
     z-index: 3;
+}
+
+.projects-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.sidebar li {
+    font-size: 1.2rem;
+}
+
+.new-project {
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.new-project:hover {
+    cursor: pointer;
 }
 
 #content {
