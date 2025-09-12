@@ -2,6 +2,7 @@ import "./styles.css";
 
 
 const content = document.querySelector("#content");
+const projectList = document.querySelector("#projects-list");
 
 const projects = [];
 
@@ -31,7 +32,7 @@ function createProject(name) {
 }
 
 
-function createNewToDoItem(item) {
+function createToDoItemElement(item) {
 
     const card = document.createElement("div");
     card.classList.add("card");
@@ -86,7 +87,20 @@ function createNewToDoItem(item) {
     content.appendChild(card);
 }
 
-createNewToDoItem(item);
+function createProjectElement() {
+    const listItem = document.createElement("li");
+    const button = document.createElement("button");
+
+    button.innerText = "Project";
+
+    listItem.appendChild(button);
+
+    projectList.appendChild(listItem);
+}
+
+createToDoItemElement();
+createProjectElement();
+
 
 const newProject = createProject("Work-out");
 
