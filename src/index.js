@@ -6,7 +6,6 @@ const projectList = document.querySelector("#projects-list");
 
 const projects = [];
 
-
 function createProject(name) {
     
     let projectName = name;
@@ -98,8 +97,35 @@ function createProjectElement() {
     projectList.appendChild(listItem);
 }
 
+function createProjectDetailsElement(project) {
+
+    const projectDetails = document.createElement("div");
+    const projectTitle = document.createElement("input");
+    const projectDate = document.createElement("div");
+
+    projectDetails.classList.add("project-details");
+
+    projectTitle.type = "text";
+    projectTitle.classList.add("project-details-title");
+    projectTitle.placeholder = "Project Title";
+    
+    // Edit Later
+    projectTitle.value = "hi";
+
+    projectDate.classList.add("project-details-date");
+
+    // Edit Later
+    projectDate.innerText = "Created: 1234";   
+
+    projectDetails.appendChild(projectTitle);
+    projectDetails.appendChild(projectDate);
+
+    content.appendChild(projectDetails);
+}
+
+createProjectDetailsElement();
 createToDoItemElement();
-createProjectElement();
+
 
 
 const newProject = createProject("Work-out");
