@@ -1,5 +1,5 @@
 import { createToDoItem } from "./todo-item.js";
-
+import clearContent from "./contentClear.js";
 
 const content = document.querySelector("#content");
 
@@ -12,14 +12,13 @@ function createProject(name) {
     const projectElement = createProjectElement();
     const projectDetails = createProjectDetailsElement();
 
-    const todo = createToDoItem("hi", "bye");
-    items.push(todo);
-
     function createProjectDetailsElement() {
 
         const projectDetails = document.createElement("div");
         const projectTitle = document.createElement("input");
         const newItemButton = document.createElement("button");
+        const saveButton = document.createElement("button");
+        const deleteButton = document.createElement("button");
         const projectDate = document.createElement("div");
 
         projectDetails.classList.add("project-details");
@@ -28,18 +27,27 @@ function createProject(name) {
         projectTitle.classList.add("project-details-title");
         projectTitle.placeholder = "Project Title";
         
-        projectTitle.value = "Project";
+        projectTitle.value = name;
 
         newItemButton.classList.add("new-todo");
-        newItemButton.innerText = "New Todo";
+        newItemButton.innerText = "New";
         newItemButton.addEventListener("click", createNewItem);
+
+        saveButton.classList.add("save");
+        saveButton.innerText = "Save";
+        saveButton.addEventListener("click", save);
+
+        deleteButton.classList.add("delete-project");
+        deleteButton.innerText = "Delete";
 
         projectDate.classList.add("project-details-date");
 
-        projectDate.innerText = dateMade.toLocaleDateString();   
+        projectDate.innerText = `Started on ` + dateMade.toLocaleDateString();   
 
         projectDetails.appendChild(projectTitle);
         projectDetails.appendChild(newItemButton);
+        projectDetails.appendChild(saveButton);
+        projectDetails.appendChild(deleteButton);
         projectDetails.appendChild(projectDate);
 
         return projectDetails;
@@ -60,10 +68,32 @@ function createProject(name) {
 
     function createNewItem() {
         const newItem = createToDoItem();
-        
+        newItem.todoItemElement.addEventListener("click", removeItem);
+
         items.push(newItem);
 
         displayProject();
+    }
+
+    function removeItem(event) {
+        if (!event.target.classList.contains("card-delete")) {
+            return;
+        }
+
+        const card = event.target.parentNode; 
+
+        const index = items.findIndex(item => item === card);
+
+        items.splice(index, 1);
+
+        displayProject();
+    }
+
+    function save() {
+        const projectButton = projectElement.querySelector("button");
+        const projectTitle = projectDetails.querySelector(".project-details-title");
+
+        projectButton.innerText = projectTitle.value;
     }
 
     function displayProject() {
@@ -72,17 +102,10 @@ function createProject(name) {
         content.appendChild(projectDetails);
         items.forEach(item => content.appendChild(item.todoItemElement));
 
-
     }
     
     return { projectName, dateMade, items, projectElement };
 }
 
-
-function clearContent() {
-    while (content.firstChild) {
-        content.firstChild.remove();
-    }
-}
 
 export { createProject };

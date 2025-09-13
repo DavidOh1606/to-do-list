@@ -1,5 +1,5 @@
 import { createProject } from "./project.js";
-
+import clearContent from "./contentClear.js";
 
 const content = document.querySelector("#content");
 const projectButton = document.querySelector("button.new-project");
@@ -14,6 +14,8 @@ const projectManager = (function() {
     const projects = [];
 
 
+    content.addEventListener("click", deleteProject);
+
     
     function newProject() {
         const newProject = createProject("Project");
@@ -21,6 +23,17 @@ const projectManager = (function() {
         projects.push(newProject);
         projectList.appendChild(newProject.projectElement);
         
+
+    }
+
+
+    function deleteProject(event) {
+
+        if (!event.target.classList.contains("delete-button")) {
+            return;
+        }
+
+
 
     }
 

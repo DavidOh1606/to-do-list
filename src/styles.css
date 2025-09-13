@@ -90,10 +90,6 @@ header nav button {
     padding: 8px 16px;
 }
 
-/* .new-project:hover {
-    cursor: pointer;
-} */
-
 button:hover {
     cursor: pointer;
 }
@@ -123,15 +119,20 @@ button:hover {
     font-size: 1.8rem;
 }
 
-button.new-todo {
+button.new-todo, button.save, button.delete-project {
+    
+    box-sizing: border-box;
+    width: 150px;
     border: 2px solid black;
     border-radius: 8px;
 
     font-size: 0.9rem;
     padding: 8px 48px;
+    /* padding: 8px 48px; */
 
 
 }
+
 
 .project-details-date {
     font-size: 1.5rem;
