@@ -29,11 +29,19 @@ const projectManager = (function() {
 
     function deleteProject(event) {
 
-        if (!event.target.classList.contains("delete-button")) {
+        if (!event.target.classList.contains("delete-project")) {
             return;
         }
 
+        const projectDetails = event.target.parentNode;
 
+        const index = projects.findIndex(project => project.projectDetails === projectDetails);
+
+        projects[index].projectElement.remove();
+
+        projects.splice(index, 1);
+    
+        clearContent();
 
     }
 

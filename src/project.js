@@ -104,7 +104,7 @@ function createProject(name) {
 
     }
     
-    return { projectName, dateMade, items, projectElement };
+    return { projectName, dateMade, items, projectElement, projectDetails };
 }
 
 
