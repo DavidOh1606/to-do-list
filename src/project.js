@@ -3,11 +3,12 @@ import clearContent from "./contentClear.js";
 
 const content = document.querySelector("#content");
 
-function createProject(name) {
+function createProject(name, date, newItems) {
         
     let projectName = name;
-    const dateMade = new Date();
-    let items = [];
+
+    const dateMade = date === undefined ? new Date().toLocaleDateString() : date;
+    let items = newItems === undefined ? [] : newItems;
 
     const projectElement = createProjectElement();
     const projectDetails = createProjectDetailsElement();
@@ -27,7 +28,7 @@ function createProject(name) {
         projectTitle.classList.add("project-details-title");
         projectTitle.placeholder = "Project Title";
         
-        projectTitle.value = name;
+        projectTitle.value = projectName;
 
         newItemButton.classList.add("new-todo");
         newItemButton.innerText = "New";
@@ -42,7 +43,7 @@ function createProject(name) {
 
         projectDate.classList.add("project-details-date");
 
-        projectDate.innerText = `Started on ` + dateMade.toLocaleDateString();   
+        projectDate.innerText = `Started on ` + dateMade;   
 
         projectDetails.appendChild(projectTitle);
         projectDetails.appendChild(newItemButton);
@@ -57,7 +58,7 @@ function createProject(name) {
         const listItem = document.createElement("li");
         const button = document.createElement("button");
 
-        button.innerText = "Project";
+        button.innerText = projectName;
 
         listItem.appendChild(button);
         
@@ -94,6 +95,10 @@ function createProject(name) {
         const projectTitle = projectDetails.querySelector(".project-details-title");
 
         projectButton.innerText = projectTitle.value;
+
+        const name = projectDetails.querySelector(".project-details-title").value;
+
+        return { name, dateMade };
     }
 
     function displayProject() {
@@ -104,7 +109,7 @@ function createProject(name) {
 
     }
     
-    return { projectName, dateMade, items, projectElement, projectDetails };
+    return { projectName, dateMade, items, projectElement, projectDetails, save };
 }
 
 

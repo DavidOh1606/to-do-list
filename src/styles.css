@@ -85,7 +85,7 @@ header nav button {
     border-bottom: 2px solid black;
 }
 
-.new-project {
+.new-project, .save-projects {
     border-radius: 8px;
     padding: 8px 16px;
 }

@@ -1,7 +1,9 @@
-function createToDoItem(name, notes) {
-    const itemName = name;
-    const itemNotes = notes;
-    const startDate = new Date();
+
+function createToDoItem(name, time, notes, date, checked) {
+    let itemName = name;
+    let itemTime = time;
+    let itemNotes = notes;
+    const startDate = date === undefined ? new Date().toLocaleDateString() : date;
     const endDate = null;
     const todoItemElement = createToDoItemElement();
 
@@ -15,12 +17,14 @@ function createToDoItem(name, notes) {
         title.type = "text";
         title.classList.add("card-name");
         title.placeholder = "To Do";
+        title.value = itemName === undefined ? "" : itemName;
 
         const time = document.createElement("input");
 
         time.type = "text";
         time.classList.add("card-time");
         time.placeholder = "Time";
+        time.value = itemTime === undefined ? "" : itemTime;
 
         const notesDiv = document.createElement("div");
         const notesText = document.createElement("textarea");
@@ -29,6 +33,7 @@ function createToDoItem(name, notes) {
         notesDiv.classList.add("card-notes");
 
         notesText.classList.add("card-notes-text");
+        notesText.value = itemNotes === undefined ? "" : itemNotes;
 
         notesDiv.appendChild(notesText);
 
@@ -43,6 +48,7 @@ function createToDoItem(name, notes) {
 
         doneCheckbox.type = "checkbox";
         doneCheckbox.id = "finished";
+        doneCheckbox.checked = checked === undefined ? false : checked;
 
         doneDiv.appendChild(doneLabel);
         doneDiv.appendChild(doneCheckbox);
@@ -61,7 +67,15 @@ function createToDoItem(name, notes) {
         return card;
     }
 
-    return { itemName, itemNotes, startDate, endDate, todoItemElement };
+    function save() {
+        itemName = todoItemElement.querySelector(".card-name").value;
+        itemTime = todoItemElement.querySelector(".card-time").value;
+        itemNotes = todoItemElement.querySelector(".card-notes-text").value;
+        const checked = todoItemElement.querySelector("[type='checkbox']").checked;
+        return {itemName, itemTime, startDate, itemNotes, checked};
+    }
+
+    return { itemName, itemTime, itemNotes, startDate, endDate, todoItemElement, save };
 };
 
 
